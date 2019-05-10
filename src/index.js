@@ -1,18 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Stage, Layer, Rect, Text, Arrow } from 'react-konva';
-import Step from './components/step';
+import Step, { createStepProps } from './components/step';
 import Connection from './components/connection';
 
-const FirstStep = () => (<Step x={20} y={100} name="first step" />);
-const SecondStep = () => (<Step x={220} y={100} name="second step" />);
+const rowHeight = 100;
+const firstRow = rowHeight*0;
+const columnWidth = 180;
+const uvpArrived = createStepProps(columnWidth*0, firstRow, "UVP Arrived");
+const uvpUnpack = createStepProps(columnWidth*1, firstRow, "UVP Unpack");
+const adiValidation = createStepProps(columnWidth*2, firstRow, "ADI Validation");
+const adiIngest = createStepProps(columnWidth*3, firstRow, "ADI Ingest");
+const adiIngestComplete = createStepProps(columnWidth*4, firstRow, "ADI Ingest Completed");
 
 const Index = () => (
-    <Stage width={400} height={200}>
+    <Stage width={1000} height={200}>
         <Layer>
-            <FirstStep/>
-            <SecondStep/>
-            <Connection x1={120} y1={125} x2={220} y2={125} />
+            <Step step={uvpArrived}/>
+            <Step step={uvpUnpack}/>
+            <Connection leftStep={uvpArrived} rightStep={uvpUnpack} />
+            <Step step={adiValidation}/>
+            <Connection leftStep={uvpUnpack} rightStep={adiValidation} />
+            <Step step={adiIngest}/>
+            <Connection leftStep={adiValidation} rightStep={adiIngest} />
+            <Step step={adiIngestComplete}/>
+            <Connection leftStep={adiIngest} rightStep={adiIngestComplete} />
         </Layer>
     </Stage>
 );

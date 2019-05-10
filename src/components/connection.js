@@ -1,8 +1,8 @@
 import React from "react";
 import { Arrow } from 'react-konva';
 
-const Connection = ({x1, y1, x2, y2}) => (
-    <Arrow x={x1} y={y1} points={[0, 0, x2-x1, y2-y1]} stroke={'black'} strokeWidth={3} />
+const Connection = ({leftStep, rightStep}) => (
+    <Arrow x={leftStep.right_x} y={leftStep.middle_y} points={[0, 0, rightStep.left_x-leftStep.right_x, rightStep.middle_y-leftStep.middle_y]} stroke={'black'} fill={'black'} strokeWidth={2} />
 );
 
 export default Connection;
