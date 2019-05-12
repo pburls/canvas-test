@@ -13,6 +13,10 @@ export const createStepProps = (x, y, name) => {
     };
 }
 
+const onInfoClick = () => {
+    console.log('info clicked');
+};
+
 const Step = ({step}) => {
     return (
     <Group x={step.left_x} y={step.top_y}>
@@ -28,7 +32,19 @@ const Step = ({step}) => {
             text={step.name}
             padding={5}
             align={'center'}
-            />
+        />
+        <Text
+            fontFamily="FontAwesome"
+            text={'\uf05a'}
+            fill="black"
+            onMouseDown={onInfoClick}
+            onMouseEnter={() => {
+                document.body.style.cursor = "pointer";
+            }}
+            onMouseLeave={() => {
+                document.body.style.cursor = "default";
+            }}
+        />
     </Group>
     );
 }
