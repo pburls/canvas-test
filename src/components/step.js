@@ -3,7 +3,7 @@ import { Group, Rect, Text } from 'react-konva';
 
 export const width = 100;
 export const height = 50;
-export const createStepProps = (x, y, name) => {
+export const createStepLocation = (x, y, name) => {
     return {
         left_x: x,
         top_y: y,
@@ -17,9 +17,9 @@ const onInfoClick = () => {
     console.log('info clicked');
 };
 
-const Step = ({step}) => {
+const Step = ({location}) => {
     return (
-    <Group x={step.left_x} y={step.top_y}>
+    <Group x={location.left_x} y={location.top_y}>
         <Rect
             width={width}
             height={height}
@@ -29,7 +29,7 @@ const Step = ({step}) => {
         </Rect>
         <Text
             width={width}
-            text={step.name}
+            text={location.name}
             padding={5}
             align={'center'}
         />
