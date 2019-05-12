@@ -12,16 +12,18 @@ const adiValidation = createStepLocation(columnWidth*2, firstRow, "ADI Validatio
 const adiIngest = createStepLocation(columnWidth*3, firstRow, "ADI Ingest");
 const adiIngestComplete = createStepLocation(columnWidth*4, firstRow, "ADI Ingest Completed");
 
-const MapWorkflow = ({x, y}) => (
+
+
+const MapWorkflow = ({x, y, infoClick}) => (
     <Group x={x} y={y}>
-        <Step location={uvpArrived}/>
-        <Step location={uvpUnpack}/>
+        <Step location={uvpArrived} infoClick={infoClick}/>
+        <Step location={uvpUnpack} infoClick={infoClick}/>
         <Connection leftStep={uvpArrived} rightStep={uvpUnpack} />
         <Step location={adiValidation}/>
         <Connection leftStep={uvpUnpack} rightStep={adiValidation} />
         <Step location={adiIngest}/>
         <Connection leftStep={adiValidation} rightStep={adiIngest} />
-        <Step location={adiIngestComplete}/>
+        <Step location={adiIngestComplete} infoClick={infoClick}/>
         <Connection leftStep={adiIngest} rightStep={adiIngestComplete} />
     </Group>
 );

@@ -13,11 +13,7 @@ export const createStepLocation = (x, y, name) => {
     };
 }
 
-const onInfoClick = () => {
-    console.log('info clicked');
-};
-
-const Step = ({location}) => {
+const Step = ({location, infoClick}) => {
     return (
     <Group x={location.left_x} y={location.top_y}>
         <Rect
@@ -33,18 +29,21 @@ const Step = ({location}) => {
             padding={5}
             align={'center'}
         />
-        <Text
+        {infoClick && 
+        (<Text
             fontFamily="FontAwesome"
             text={'\uf05a'}
             fill="black"
-            onMouseDown={onInfoClick}
+            onMouseDown={() => {
+                infoClick(location.name);
+            }}
             onMouseEnter={() => {
                 document.body.style.cursor = "pointer";
             }}
             onMouseLeave={() => {
                 document.body.style.cursor = "default";
             }}
-        />
+        />)}
     </Group>
     );
 }
